@@ -1,5 +1,5 @@
-from django.http import HttpResponse
+from django.views.generic import TemplateView
 
 
-def index(request):
-    return HttpResponse("Привет от Хекслета!")
+class IndexView(TemplateView):
+    template_name = "index.html"

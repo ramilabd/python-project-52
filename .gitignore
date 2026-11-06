@@ -4,3 +4,5 @@ db.sqlite3
 staticfiles/
 __pycache__/
 .idea/
+.django_tailwind_cli/
+assets/css/tailwind.css

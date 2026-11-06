@@ -10,7 +10,7 @@ collectstatic:
 migrate:
 	uv run python manage.py migrate
 
-setup: install collectstatic migrate
+setup: install build-css collectstatic migrate
 
 lint:
 	uv run ruff check
@@ -20,3 +20,12 @@ build:
 
 render-start:
 	gunicorn task_manager.wsgi
+
+build-css:
+    uv run python manage.py tailwind build --force
+
+messages:
+	uv run python manage.py makemessages -l ru
+
+compile-messages:
+	uv run python manage.py compilemessages
