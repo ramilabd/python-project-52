@@ -1,0 +1,10 @@
+[
+  {"model": "auth.user", "pk": 1,
+   "fields": {"username": "ivan", "first_name": "Иван", "last_name": "Петров",
+              "password": "pbkdf2_sha256$1500000$5ngtgyEAed7XVcXKO0LmhM$Sr7spb3wDugdEtxNCEdAm3nIb0r9Wvqy0GjHc6uRFSU=",
+              "is_active": true, "date_joined": "2026-11-01T10:00:00Z"}},
+  {"model": "auth.user", "pk": 2,
+   "fields": {"username": "anna", "first_name": "Анна", "last_name": "Сидорова",
+              "password": "pbkdf2_sha256$1500000$5ngtgyEAed7XVcXKO0LmhM$Sr7spb3wDugdEtxNCEdAm3nIb0r9Wvqy0GjHc6uRFSU=",
+              "is_active": true, "date_joined": "2026-11-01T10:00:00Z"}}
+]

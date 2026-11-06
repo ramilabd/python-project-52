@@ -3,36 +3,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}Task Manager{% endblock %}</title>
-  {% tailwind_css %}
-  {% load i18n %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Task Manager{% endblock %}</title>
+    {% tailwind_css %}
+    {% load i18n %}
 </head>
 <body class="bg-gray-50 min-h-screen">
-  <nav class="bg-white shadow">
+<nav class="bg-white shadow">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-6">
-      <a href="/" class="text-xl font-bold text-blue-600">{% translate "Task manager" %}</a>
-      <a href="#" class="text-gray-700 hover:text-blue-600">{% translate "Users" %}</a>
-      <div class="ml-auto flex gap-4">
-        <a href="#" class="text-gray-700 hover:text-blue-600">{% translate "Login" %}</a>
-        <a href="#" class="text-gray-700 hover:text-blue-600">{% translate "Sign up" %}</a>
-      </div>
-    </div>
-  </nav>
-
-  {% if messages %}
-    <div class="max-w-6xl mx-auto px-4 mt-4">
-      {% for message in messages %}
-        <div role="alert" class="rounded bg-blue-100 text-blue-800 px-4 py-2 mb-2">
-          {{ message }}
+        <a href="/" class="text-xl font-bold text-blue-600">{% translate "Task manager" %}</a>
+        <a href="{% url 'users_index' %}" class="text-gray-700 hover:text-blue-600">{% translate "Users" %}</a>
+        <div class="ml-auto flex items-center gap-4">
+            {% if user.is_authenticated %}
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="text-gray-700 hover:text-blue-600">{% translate "Logout" %}</button>
+            </form>
+            {% else %}
+            <a href="{% url 'login' %}" class="text-gray-700 hover:text-blue-600">{% translate "Login" %}</a>
+            <a href="{% url 'users_create' %}" class="text-gray-700 hover:text-blue-600">{% translate "Sign up" %}</a>
+            {% endif %}
         </div>
-      {% endfor %}
     </div>
-  {% endif %}
+</nav>
 
-  <main class="max-w-6xl mx-auto px-4 py-8">
+{% if messages %}
+<div class="max-w-6xl mx-auto px-4 mt-4">
+    {% for message in messages %}
+    <div role="alert" class="rounded bg-blue-100 text-blue-800 px-4 py-2 mb-2">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<main class="max-w-6xl mx-auto px-4 py-8">
     {% block content %}{% endblock %}
-  </main>
+</main>
 </body>
 </html>

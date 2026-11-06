@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+  <h1 class="text-3xl font-bold text-gray-900 mb-6">{{ title }}</h1>
+  <form method="post" class="max-w-md space-y-4">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">{{ button }}</button>
+  </form>
+{% endblock %}

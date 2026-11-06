@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-06 15:13+0000\n"
+"POT-Creation-Date: 2026-11-06 17:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,18 +19,98 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
 #: task_manager/templates/base.html:15
 msgid "Task manager"
 msgstr "Менеджер задач"
 
-#: task_manager/templates/base.html:16
+#: task_manager/templates/base.html:16 users/templates/users/index.html:5
 msgid "Users"
 msgstr "Пользователи"
 
-#: task_manager/templates/base.html:18
+#: task_manager/templates/base.html:21
+msgid "Logout"
+msgstr "Выход"
+
+#: task_manager/templates/base.html:24 users/views.py:60
 msgid "Login"
 msgstr "Вход"
 
-#: task_manager/templates/base.html:19
+#: task_manager/templates/base.html:25 users/views.py:27
 msgid "Sign up"
 msgstr "Регистрация"
+
+#: users/templates/users/delete.html:5
+msgid "Delete user"
+msgstr "Удалить пользователя"
+
+#: users/templates/users/delete.html:6
+#, python-format
+msgid "Are you sure you want to delete %(name)s?"
+msgstr "Вы уверены, что хотите удалить "
+
+#: users/templates/users/delete.html:9
+msgid "Yes, delete"
+msgstr "Да, удалить"
+
+#: users/templates/users/index.html:10
+#, fuzzy
+#| msgid "Users"
+msgid "Username"
+msgstr "Пользователи"
+
+#: users/templates/users/index.html:11
+msgid "Full name"
+msgstr "Полное имя"
+
+#: users/templates/users/index.html:12
+msgid "Created at"
+msgstr "Создан"
+
+#: users/templates/users/index.html:24
+msgid "Edit"
+msgstr "Изменить"
+
+#: users/templates/users/index.html:25
+msgid "Delete"
+msgstr "Удалить"
+
+#: users/views.py:26
+msgid "User registered successfully"
+msgstr "Пользователь успешно зарегистрирован"
+
+#: users/views.py:27
+msgid "Register"
+msgstr "Зарегистрировать"
+
+#: users/views.py:36
+msgid "You have no rights to change"
+msgstr "У вас нет прав для изменения"
+
+#: users/views.py:46
+msgid "User updated successfully"
+msgstr "Пользователь успешно изменен"
+
+#: users/views.py:47
+msgid "Edit user"
+msgstr "Редактировать пользователя"
+
+#: users/views.py:47
+msgid "Change"
+msgstr "Изменить"
+
+#: users/views.py:54
+msgid "User deleted successfully"
+msgstr "Пользователь успешно удален"
+
+#: users/views.py:59
+msgid "You are logged in"
+msgstr "Вы вошли"
+
+#: users/views.py:60
+msgid "Log in"
+msgstr "Войти"
+
+#: users/views.py:66
+msgid "You are logged out"
+msgstr "Вы вышли"
