@@ -22,7 +22,7 @@ render-start:
 	gunicorn task_manager.wsgi
 
 build-css:
-    uv run python manage.py tailwind build --force
+	uv run python manage.py tailwind build --force
 
 messages:
 	uv run python manage.py makemessages -l ru
