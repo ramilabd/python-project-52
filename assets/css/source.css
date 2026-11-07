@@ -2,3 +2,7 @@
 @plugin "@tailwindcss/forms";
 
 @source "../../task_manager";
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]) {
+  width: 100%;
+}
