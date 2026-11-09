@@ -2,33 +2,41 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from labels.models import Label
 from statuses.models import Status
 
 
 class Task(models.Model):
-    name = models.CharField(_("Name"), max_length=255, unique=True)  # unique -> «уже существует»
-    description = models.TextField(_("Description"), blank=True)     # blank=True: поле необязательное
+    name = models.CharField(_("Name"), max_length=255, unique=True)
+    description = models.TextField(_("Description"), blank=True)
     status = models.ForeignKey(
         Status,
-        on_delete=models.PROTECT,  # нельзя удалить статус, пока есть задачи с ним
+        on_delete=models.PROTECT,
         related_name="tasks",
         verbose_name=_("Status"),
     )
     author = models.ForeignKey(
         User,
-        on_delete=models.PROTECT,  # нельзя удалить автора задач
+        on_delete=models.PROTECT,
         related_name="authored_tasks",
         verbose_name=_("Author"),
     )
     executor = models.ForeignKey(
         User,
-        on_delete=models.PROTECT,  # нельзя удалить исполнителя задач
+        on_delete=models.PROTECT,
         null=True,
-        blank=True,                # исполнитель необязателен (null — в БД, blank — в форме)
+        blank=True,
         related_name="executed_tasks",
         verbose_name=_("Executor"),
     )
-    created_at = models.DateTimeField(_("Creation date"), auto_now_add=True)  # ставится при создании
+    labels = models.ManyToManyField(
+        Label,
+        through="TaskLabel",
+        blank=True,
+        related_name="tasks",
+        verbose_name=_("Labels"),
+    )
+    created_at = models.DateTimeField(_("Creation date"), auto_now_add=True)
 
     class Meta:
         ordering = ("id",)
@@ -37,3 +45,8 @@ class Task(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class TaskLabel(models.Model):
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    label = models.ForeignKey(Label, on_delete=models.PROTECT)

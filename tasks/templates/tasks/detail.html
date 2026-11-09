@@ -14,7 +14,14 @@
     <dd class="mb-2">{% if task.executor %}{{ task.executor.get_full_name|default:task.executor.username }}{% endif %}</dd>
     <dt class="font-bold">{% translate "Creation date" %}</dt>
     <dd class="mb-2">{{ task.created_at|date:"d.m.Y H:i" }}</dd>
-    {# блок «Метки» добавим в шаге 7 #}
+    <dt class="font-bold">{% translate "Labels" %}</dt>
+    <dd class="mb-2">
+      <ul>
+        {% for label in task.labels.all %}
+          <li>{{ label.name }}</li>
+        {% endfor %}
+      </ul>
+    </dd>
   </dl>
   <a href="{% url 'tasks_update' task.pk %}" class="text-blue-600">{% translate "Edit" %}</a>
   <a href="{% url 'tasks_delete' task.pk %}" class="ml-3 text-red-600">{% translate "Delete" %}</a>
