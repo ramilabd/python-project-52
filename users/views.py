@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models import ProtectedError
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
@@ -52,6 +53,13 @@ class UserDeleteView(OwnerRequiredMixin, SuccessMessageMixin, DeleteView):
     template_name = "users/delete.html"
     success_url = reverse_lazy("users_index")
     success_message = _("User deleted successfully")
+
+    def form_valid(self, form):
+        try:
+            return super().form_valid(form)
+        except ProtectedError:
+            messages.error(self.request, _("Unable to delete user"))
+            return redirect(self.success_url)
 
 
 class UserLoginView(SuccessMessageMixin, LoginView):
