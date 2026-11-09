@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+  <h1 class="text-3xl font-bold text-gray-900 mb-6">{% translate "Task view" %}</h1>
+  <h2 class="text-2xl font-semibold mb-2">{{ task.name }}</h2>
+  <p class="mb-4">{{ task.description }}</p>
+  <dl class="mb-4">
+    <dt class="font-bold">{% translate "Status" %}</dt>
+    <dd class="mb-2">{{ task.status }}</dd>
+    <dt class="font-bold">{% translate "Author" %}</dt>
+    <dd class="mb-2">{{ task.author.get_full_name|default:task.author.username }}</dd>
+    <dt class="font-bold">{% translate "Executor" %}</dt>
+    <dd class="mb-2">{% if task.executor %}{{ task.executor.get_full_name|default:task.executor.username }}{% endif %}</dd>
+    <dt class="font-bold">{% translate "Creation date" %}</dt>
+    <dd class="mb-2">{{ task.created_at|date:"d.m.Y H:i" }}</dd>
+    {# блок «Метки» добавим в шаге 7 #}
+  </dl>
+  <a href="{% url 'tasks_update' task.pk %}" class="text-blue-600">{% translate "Edit" %}</a>
+  <a href="{% url 'tasks_delete' task.pk %}" class="ml-3 text-red-600">{% translate "Delete" %}</a>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+  <h1 class="text-3xl font-bold text-gray-900 mb-6">{% translate "Tasks" %}</h1>
+  <a href="{% url 'tasks_create' %}" class="inline-block mb-4 rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">{% translate "Create task" %}</a>
+  <table class="w-full bg-white shadow rounded text-left">
+    <thead>
+      <tr class="border-b">
+        <th class="p-3">ID</th>
+        <th class="p-3">{% translate "Name" %}</th>
+        <th class="p-3">{% translate "Status" %}</th>
+        <th class="p-3">{% translate "Author" %}</th>
+        <th class="p-3">{% translate "Executor" %}</th>
+        <th class="p-3">{% translate "Creation date" %}</th>
+        <th class="p-3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in tasks %}
+        <tr class="border-b">
+          <td class="p-3">{{ task.id }}</td>
+          <td class="p-3">{{ task.name }}</td>
+          <td class="p-3">{{ task.status }}</td>
+          <td class="p-3">{{ task.author.get_full_name|default:task.author.username }}</td>
+          <td class="p-3">{% if task.executor %}{{ task.executor.get_full_name|default:task.executor.username }}{% endif %}</td>
+          <td class="p-3">{{ task.created_at|date:"d.m.Y H:i" }}</td>
+          <td class="p-3">
+            <a href="{% url 'tasks_detail' task.pk %}" class="text-blue-600">{% translate "Show" %}</a>
+            <a href="{% url 'tasks_update' task.pk %}" class="ml-3 text-blue-600">{% translate "Edit" %}</a>
+            <a href="{% url 'tasks_delete' task.pk %}" class="ml-3 text-red-600">{% translate "Delete" %}</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
