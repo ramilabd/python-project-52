@@ -25,4 +25,5 @@ urlpatterns = [
     path("", include("users.urls")),
     path("", include("statuses.urls")),
     path("", include("tasks.urls")),
+    path("", include("labels.urls")),
 ]

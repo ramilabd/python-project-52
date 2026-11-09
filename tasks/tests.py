@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
 
+from labels.models import Label
 from statuses.models import Status
 
 from .models import Task
@@ -85,7 +86,7 @@ class TaskCrudTest(TestCase):
         )
         self.assertRedirects(response, reverse("tasks_index"))
         self.assertContains(response, "Задача успешно изменена")
-        self.task.refresh_from_db()  # перечитываем объект из БД
+        self.task.refresh_from_db()
         self.assertEqual(self.task.name, "Изменённая")
         self.assertEqual(self.task.executor, self.other)
 
@@ -131,10 +132,67 @@ class TaskCrudTest(TestCase):
         self.assertContains(response, "Невозможно удалить статус")
         self.assertTrue(Status.objects.filter(pk=self.status.pk).exists())
 
+class TaskLabelsTest(TestCase):
+    fixtures: ClassVar[list] = ["users.json"]
+
+    def setUp(self):
+        self.user = User.objects.get(pk=1)
+        self.status = Status.objects.create(name="новый")
+        self.bug = Label.objects.create(name="bug")
+        self.feature = Label.objects.create(name="feature")
+        self.client.force_login(self.user)
+
+    def test_create_task_with_labels(self):
+        response = self.client.post(
+            reverse("tasks_create"),
+            {
+                "name": "С метками",
+                "description": "",
+                "status": self.status.pk,
+                "labels": [self.bug.pk, self.feature.pk],
+            },
+            follow=True,
+        )
+        self.assertRedirects(response, reverse("tasks_index"))
+        task = Task.objects.get(name="С метками")
+        self.assertCountEqual(task.labels.all(), [self.bug, self.feature])
+
+    def test_create_task_without_labels(self):
+        self.client.post(
+            reverse("tasks_create"),
+            {"name": "Без меток", "description": "", "status": self.status.pk},
+        )
+        self.assertEqual(Task.objects.get(name="Без меток").labels.count(), 0)
+
+    def test_update_task_labels(self):
+        task = Task.objects.create(name="Задача", status=self.status, author=self.user)
+        task.labels.add(self.bug)
+        self.client.post(
+            reverse("tasks_update", args=[task.pk]),
+            {
+                "name": "Задача",
+                "description": "",
+                "status": self.status.pk,
+                "labels": [self.feature.pk],
+            },
+        )
+        self.assertEqual(list(task.labels.all()), [self.feature])
+
+    def test_form_has_multiple_select_for_labels(self):
+        response = self.client.get(reverse("tasks_create"))
+        self.assertContains(response, 'name="labels"')
+        self.assertContains(response, "multiple")
+        self.assertContains(response, "Метки")
+
+    def test_detail_shows_labels(self):
+        task = Task.objects.create(name="Задача", status=self.status, author=self.user)
+        task.labels.add(self.bug)
+        response = self.client.get(reverse("tasks_detail", args=[task.pk]))
+        self.assertContains(response, "Метки")
+        self.assertContains(response, "bug")
+        self.assertNotContains(response, "feature")
 
 class TaskAccessTest(TestCase):
-    """Незалогиненный пользователь перенаправляется на вход."""
-
     fixtures: ClassVar[list] = ["users.json"]
 
     def setUp(self):
