@@ -2,13 +2,12 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-06 17:40+0000\n"
+"POT-Creation-Date: 2026-11-09 10:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,6 +19,83 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
+#: statuses/models.py:6 statuses/templates/statuses/index.html:11
+msgid "Name"
+msgstr "Имя"
+
+#: statuses/models.py:7 statuses/templates/statuses/index.html:12
+msgid "Creation date"
+msgstr "Дата создания"
+
+#: statuses/models.py:11
+msgid "status"
+msgstr "статус"
+
+#: statuses/models.py:12
+msgid "statuses"
+msgstr "статусы"
+
+#: statuses/templates/statuses/delete.html:5
+msgid "Delete status"
+msgstr "Удаление статус"
+
+#: statuses/templates/statuses/delete.html:6
+#: users/templates/users/delete.html:6
+#, python-format
+msgid "Are you sure you want to delete %(name)s?"
+msgstr "Вы уверены, что хотите удалить %(name)s?"
+
+#: statuses/templates/statuses/delete.html:9
+#: users/templates/users/delete.html:9
+msgid "Yes, delete"
+msgstr "Да, удалить"
+
+#: statuses/templates/statuses/index.html:5 task_manager/templates/base.html:18
+msgid "Statuses"
+msgstr "Статусы"
+
+#: statuses/templates/statuses/index.html:6 statuses/views.py:28
+msgid "Create status"
+msgstr "Создать статус"
+
+#: statuses/templates/statuses/index.html:23
+#: users/templates/users/index.html:24
+msgid "Edit"
+msgstr "Изменить"
+
+#: statuses/templates/statuses/index.html:24
+#: users/templates/users/index.html:25
+msgid "Delete"
+msgstr "Удалить"
+
+#: statuses/views.py:26
+msgid "Status created successfully"
+msgstr "Статус успешно создан"
+
+#: statuses/views.py:29
+msgid "Create"
+msgstr "Создать"
+
+#: statuses/views.py:38
+msgid "Status updated successfully"
+msgstr "Статус успешно изменен"
+
+#: statuses/views.py:40
+msgid "Edit status"
+msgstr "Изменение статуса"
+
+#: statuses/views.py:41 users/views.py:47
+msgid "Change"
+msgstr "Изменить"
+
+#: statuses/views.py:49
+msgid "Status deleted successfully"
+msgstr "Статус успешно удален"
+
+#: statuses/views.py:55
+msgid "Unable to delete status"
+msgstr "Невозможно удалить статус"
+
 #: task_manager/templates/base.html:15
 msgid "Task manager"
 msgstr "Менеджер задач"
@@ -28,15 +104,15 @@ msgstr "Менеджер задач"
 msgid "Users"
 msgstr "Пользователи"
 
-#: task_manager/templates/base.html:21
+#: task_manager/templates/base.html:24
 msgid "Logout"
 msgstr "Выход"
 
-#: task_manager/templates/base.html:24 users/views.py:60
+#: task_manager/templates/base.html:27 users/views.py:60
 msgid "Login"
 msgstr "Вход"
 
-#: task_manager/templates/base.html:25 users/views.py:27
+#: task_manager/templates/base.html:28 users/views.py:27
 msgid "Sign up"
 msgstr "Регистрация"
 
@@ -44,20 +120,9 @@ msgstr "Регистрация"
 msgid "Delete user"
 msgstr "Удалить пользователя"
 
-#: users/templates/users/delete.html:6
-#, python-format
-msgid "Are you sure you want to delete %(name)s?"
-msgstr "Вы уверены, что хотите удалить "
-
-#: users/templates/users/delete.html:9
-msgid "Yes, delete"
-msgstr "Да, удалить"
-
 #: users/templates/users/index.html:10
-#, fuzzy
-#| msgid "Users"
 msgid "Username"
-msgstr "Пользователи"
+msgstr "Имя пользователя"
 
 #: users/templates/users/index.html:11
 msgid "Full name"
@@ -66,14 +131,6 @@ msgstr "Полное имя"
 #: users/templates/users/index.html:12
 msgid "Created at"
 msgstr "Создан"
-
-#: users/templates/users/index.html:24
-msgid "Edit"
-msgstr "Изменить"
-
-#: users/templates/users/index.html:25
-msgid "Delete"
-msgstr "Удалить"
 
 #: users/views.py:26
 msgid "User registered successfully"
@@ -94,10 +151,6 @@ msgstr "Пользователь успешно изменен"
 #: users/views.py:47
 msgid "Edit user"
 msgstr "Редактировать пользователя"
-
-#: users/views.py:47
-msgid "Change"
-msgstr "Изменить"
 
 #: users/views.py:54
 msgid "User deleted successfully"
