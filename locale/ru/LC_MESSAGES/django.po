@@ -297,3 +297,11 @@ msgstr "Войти"
 #: users/views.py:74
 msgid "You are logged out"
 msgstr "Вы вышли"
+
+#: tasks/filters.py
+msgid "Label"
+msgstr "Метка"
+
+#: tasks/filters.py
+msgid "Only own tasks"
+msgstr "Только свои задачи"

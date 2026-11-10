@@ -212,3 +212,61 @@ class TaskAccessTest(TestCase):
             with self.subTest(url=url):
                 response = self.client.get(url)
                 self.assertRedirects(response, f"{reverse('login')}?next={url}")
+
+
+class TaskFilterTest(TestCase):
+    fixtures: ClassVar[list] = ["users.json"]
+
+    def setUp(self):
+        self.user = User.objects.get(pk=1)
+        self.other = User.objects.get(pk=2)
+        self.new = Status.objects.create(name="новый")
+        self.done = Status.objects.create(name="завершён")
+        self.bug = Label.objects.create(name="баг")
+        self.feature = Label.objects.create(name="фича")
+        self.task1 = Task.objects.create(
+            name="Задача один",
+            status=self.new,
+            author=self.user,
+            executor=self.other,
+        )
+        self.task1.labels.add(self.bug)
+        self.task2 = Task.objects.create(
+            name="Задача два",
+            status=self.done,
+            author=self.other,
+            executor=self.user,
+        )
+        self.task2.labels.add(self.feature)
+        self.client.force_login(self.user)
+
+    def get_tasks(self, **params):
+        response = self.client.get(reverse("tasks_index"), params)
+        self.assertEqual(response.status_code, 200)
+        return list(response.context["tasks"])
+
+    def test_filter_form_is_displayed(self):
+        response = self.client.get(reverse("tasks_index"))
+        for text in ("Статус", "Исполнитель", "Метка", "Только свои задачи"):
+            self.assertContains(response, text)
+
+    def test_no_filters_returns_all_tasks(self):
+        self.assertEqual(self.get_tasks(), [self.task1, self.task2])
+
+    def test_filter_by_status(self):
+        self.assertEqual(self.get_tasks(status=self.done.pk), [self.task2])
+
+    def test_filter_by_executor(self):
+        self.assertEqual(self.get_tasks(executor=self.other.pk), [self.task1])
+
+    def test_filter_by_label(self):
+        self.assertEqual(self.get_tasks(labels=self.bug.pk), [self.task1])
+
+    def test_filter_only_own_tasks(self):
+        self.assertEqual(self.get_tasks(self_tasks="on"), [self.task1])
+
+    def test_combined_filters(self):
+        tasks = self.get_tasks(status=self.new.pk, labels=self.feature.pk)
+        self.assertEqual(tasks, [])
+        tasks = self.get_tasks(status=self.new.pk, self_tasks="on")
+        self.assertEqual(tasks, [self.task1])
