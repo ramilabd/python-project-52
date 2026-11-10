@@ -13,14 +13,17 @@ class TaskFilter(django_filters.FilterSet):
     status = django_filters.ModelChoiceFilter(
         queryset=Status.objects.all(),
         label=_("Status"),
+        empty_label=_("Not selected"),
     )
     executor = django_filters.ModelChoiceFilter(
         queryset=User.objects.all(),
         label=_("Executor"),
+        empty_label=_("Not selected"),
     )
     labels = django_filters.ModelChoiceFilter(
         queryset=Label.objects.all(),
         label=_("Label"),
+        empty_label=_("Not selected"),
     )
     self_tasks = django_filters.BooleanFilter(
         method="filter_self_tasks",

@@ -13,3 +13,7 @@ class TaskForm(forms.ModelForm):
         self.fields["executor"].label_from_instance = (
             lambda user: user.get_full_name() or user.username
         )
+        self.fields["status"].empty_label = "---------"
+        self.fields["executor"].empty_label = "---------"
+        for name in ("description", "status", "executor", "labels"):
+            self.fields[name].widget.attrs["class"] = "w-full"

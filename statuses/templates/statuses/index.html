@@ -4,9 +4,9 @@
 {% block content %}
   <h1 class="text-3xl font-bold text-gray-900 mb-6">{% translate "Statuses" %}</h1>
   <a href="{% url 'statuses_create' %}" class="inline-block mb-4 rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">{% translate "Create status" %}</a>
-  <table class="w-full bg-white shadow rounded text-left">
+  <table class="w-full text-left">
     <thead>
-      <tr class="border-b">
+      <tr class="border-b border-gray-300">
         <th class="p-3">ID</th>
         <th class="p-3">{% translate "Name" %}</th>
         <th class="p-3">{% translate "Creation date" %}</th>
@@ -15,13 +15,13 @@
     </thead>
     <tbody>
       {% for status in statuses %}
-        <tr class="border-b">
+        <tr class="border-b border-gray-200 bg-gray-50">
           <td class="p-3">{{ status.id }}</td>
           <td class="p-3">{{ status.name }}</td>
           <td class="p-3">{{ status.created_at|date:"d.m.Y H:i" }}</td>
-          <td class="p-3">
-            <a href="{% url 'statuses_update' status.pk %}" class="text-blue-600">{% translate "Edit" %}</a>
-            <a href="{% url 'statuses_delete' status.pk %}" class="ml-3 text-red-600">{% translate "Delete" %}</a>
+            <td class="p-3">
+            <a href="{% url 'statuses_update' status.pk %}" class="block text-blue-600">{% translate "Edit" %}</a>
+            <a href="{% url 'statuses_delete' status.pk %}" class="block text-blue-600">{% translate "Delete" %}</a>
           </td>
         </tr>
       {% endfor %}
