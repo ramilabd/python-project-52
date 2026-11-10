@@ -82,4 +82,4 @@ class AuthTest(TestCase):
         self.assertContains(response, "Вы залогинены")
         response = self.client.post(reverse("logout"), follow=True)
         self.assertRedirects(response, reverse("index"))
-        self.assertContains(response, "Вы вышли")
+        self.assertContains(response, "Вы разлогинены")

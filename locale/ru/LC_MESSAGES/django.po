@@ -297,7 +297,7 @@ msgstr "Войти"
 
 #: users/views.py:74
 msgid "You are logged out"
-msgstr "Вы вышли"
+msgstr "Вы разлогинены"
 
 #~ msgid "Created at"
 #~ msgstr "Создан"
