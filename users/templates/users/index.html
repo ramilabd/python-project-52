@@ -3,26 +3,26 @@
 
 {% block content %}
   <h1 class="text-3xl font-bold text-gray-900 mb-6">{% translate "Users" %}</h1>
-  <table class="w-full bg-white shadow rounded text-left">
+    <table class="w-full text-left">
     <thead>
-      <tr class="border-b">
+      <tr class="border-b border-gray-300">
         <th class="p-3">ID</th>
         <th class="p-3">{% translate "Username" %}</th>
         <th class="p-3">{% translate "Full name" %}</th>
-        <th class="p-3">{% translate "Created at" %}</th>
+        <th class="p-3">{% translate "Creation date" %}</th>
         <th class="p-3"></th>
       </tr>
     </thead>
     <tbody>
       {% for u in users %}
-        <tr class="border-b">
+        <tr class="border-b border-gray-200 bg-gray-50">
           <td class="p-3">{{ u.id }}</td>
           <td class="p-3">{{ u.username }}</td>
           <td class="p-3">{{ u.get_full_name }}</td>
           <td class="p-3">{{ u.date_joined|date:"d.m.Y H:i" }}</td>
           <td class="p-3">
-            <a href="{% url 'users_update' u.pk %}" class="text-blue-600">{% translate "Edit" %}</a>
-            <a href="{% url 'users_delete' u.pk %}" class="ml-3 text-red-600">{% translate "Delete" %}</a>
+            <a href="{% url 'users_update' u.pk %}" class="block text-blue-600">{% translate "Edit" %}</a>
+            <a href="{% url 'users_delete' u.pk %}" class="block text-blue-600">{% translate "Delete" %}</a>
           </td>
         </tr>
       {% endfor %}

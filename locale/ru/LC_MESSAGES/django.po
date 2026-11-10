@@ -305,3 +305,7 @@ msgstr "Метка"
 #: tasks/filters.py
 msgid "Only own tasks"
 msgstr "Только свои задачи"
+
+#: tasks/filters.py
+msgid "Not selected"
+msgstr "Не выбрано"

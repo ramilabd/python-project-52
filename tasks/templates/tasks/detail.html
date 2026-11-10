@@ -3,26 +3,41 @@
 
 {% block content %}
   <h1 class="text-3xl font-bold text-gray-900 mb-6">{% translate "Task view" %}</h1>
-  <h2 class="text-2xl font-semibold mb-2">{{ task.name }}</h2>
-  <p class="mb-4">{{ task.description }}</p>
-  <dl class="mb-4">
-    <dt class="font-bold">{% translate "Status" %}</dt>
-    <dd class="mb-2">{{ task.status }}</dd>
-    <dt class="font-bold">{% translate "Author" %}</dt>
-    <dd class="mb-2">{{ task.author.get_full_name|default:task.author.username }}</dd>
-    <dt class="font-bold">{% translate "Executor" %}</dt>
-    <dd class="mb-2">{% if task.executor %}{{ task.executor.get_full_name|default:task.executor.username }}{% endif %}</dd>
-    <dt class="font-bold">{% translate "Creation date" %}</dt>
-    <dd class="mb-2">{{ task.created_at|date:"d.m.Y H:i" }}</dd>
-    <dt class="font-bold">{% translate "Labels" %}</dt>
-    <dd class="mb-2">
-      <ul>
-        {% for label in task.labels.all %}
-          <li>{{ label.name }}</li>
-        {% endfor %}
-      </ul>
-    </dd>
-  </dl>
-  <a href="{% url 'tasks_update' task.pk %}" class="text-blue-600">{% translate "Edit" %}</a>
-  <a href="{% url 'tasks_delete' task.pk %}" class="ml-3 text-red-600">{% translate "Delete" %}</a>
+
+  <div class="rounded border border-gray-300 overflow-hidden">
+    <div class="bg-slate-600 px-4 py-3">
+      <h2 class="text-2xl font-bold text-white">{{ task.name }}</h2>
+    </div>
+    <div class="bg-gray-50 p-4">
+      <p>{{ task.description }}</p>
+      <hr class="my-4 border-gray-300">
+
+      <div class="grid grid-cols-2 gap-y-1">
+        <div>{% translate "Author" %}</div>
+        <div>{{ task.author.get_full_name|default:task.author.username }}</div>
+        <div>{% translate "Executor" %}</div>
+        <div>{% if task.executor %}{{ task.executor.get_full_name|default:task.executor.username }}{% endif %}</div>
+        <div>{% translate "Status" %}</div>
+        <div>{{ task.status }}</div>
+        <div>{% translate "Creation date" %}</div>
+        <div>{{ task.created_at|date:"d.m.Y H:i" }}</div>
+      </div>
+
+      {% if task.labels.exists %}
+        <div class="mt-4">
+          <strong>{% translate "Labels" %}:</strong>
+          <ul class="list-disc pl-5">
+            {% for label in task.labels.all %}
+              <li>{{ label.name }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      <div class="mt-4">
+        <a href="{% url 'tasks_update' task.pk %}" class="text-blue-600">{% translate "Edit" %}</a>
+        <a href="{% url 'tasks_delete' task.pk %}" class="ml-3 text-blue-600">{% translate "Delete" %}</a>
+      </div>
+    </div>
+  </div>
 {% endblock %}
