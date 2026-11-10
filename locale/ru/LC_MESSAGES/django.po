@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-09 19:53+0000\n"
+"POT-Creation-Date: 2026-11-10 13:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,14 +21,14 @@ msgstr ""
 
 #: labels/models.py:6 labels/templates/labels/index.html:11
 #: statuses/models.py:6 statuses/templates/statuses/index.html:11
-#: tasks/models.py:10 tasks/templates/tasks/index.html:11
+#: tasks/models.py:10 tasks/templates/tasks/index.html:33
 msgid "Name"
 msgstr "Имя"
 
 #: labels/models.py:7 labels/templates/labels/index.html:12
 #: statuses/models.py:7 statuses/templates/statuses/index.html:12
-#: tasks/models.py:39 tasks/templates/tasks/detail.html:15
-#: tasks/templates/tasks/index.html:15
+#: tasks/models.py:39 tasks/templates/tasks/detail.html:22
+#: tasks/templates/tasks/index.html:37 users/templates/users/index.html:12
 msgid "Creation date"
 msgstr "Дата создания"
 
@@ -41,7 +41,6 @@ msgid "labels"
 msgstr ""
 
 #: labels/templates/labels/delete.html:5
-#| msgid "Delete task"
 msgid "Delete label"
 msgstr "Удаление метки"
 
@@ -59,59 +58,53 @@ msgid "Yes, delete"
 msgstr "Да, удалить"
 
 #: labels/templates/labels/index.html:5 task_manager/templates/base.html:19
-#: tasks/models.py:37 tasks/templates/tasks/detail.html:17
+#: tasks/models.py:37 tasks/templates/tasks/detail.html:28
 msgid "Labels"
 msgstr "Метки"
 
 #: labels/templates/labels/index.html:6 labels/views.py:28
-#| msgid "Created at"
 msgid "Create label"
 msgstr "Создать метку"
 
 #: labels/templates/labels/index.html:23
 #: statuses/templates/statuses/index.html:23
-#: tasks/templates/tasks/detail.html:26 tasks/templates/tasks/index.html:30
+#: tasks/templates/tasks/detail.html:38 tasks/templates/tasks/index.html:51
 #: users/templates/users/index.html:24
 msgid "Edit"
 msgstr "Изменить"
 
 #: labels/templates/labels/index.html:24
 #: statuses/templates/statuses/index.html:24
-#: tasks/templates/tasks/detail.html:27 tasks/templates/tasks/index.html:31
+#: tasks/templates/tasks/detail.html:39 tasks/templates/tasks/index.html:52
 #: users/templates/users/index.html:25
 msgid "Delete"
 msgstr "Удалить"
 
 #: labels/views.py:26
-#| msgid "Task created successfully"
 msgid "Label created successfully"
 msgstr "Метка успешно создана"
 
-#: labels/views.py:29 statuses/views.py:29 tasks/views.py:54
+#: labels/views.py:29 statuses/views.py:29 tasks/views.py:56
 msgid "Create"
 msgstr "Создать"
 
 #: labels/views.py:38
-#| msgid "Task updated successfully"
 msgid "Label updated successfully"
 msgstr "Метка успешно изменена"
 
 #: labels/views.py:40
-#| msgid "Edit task"
 msgid "Edit label"
 msgstr "Изменение метки"
 
-#: labels/views.py:41 statuses/views.py:41 tasks/views.py:70 users/views.py:48
+#: labels/views.py:41 statuses/views.py:41 tasks/views.py:72 users/views.py:48
 msgid "Change"
 msgstr "Изменить"
 
 #: labels/views.py:49
-#| msgid "Task deleted successfully"
 msgid "Label deleted successfully"
 msgstr "Метка успешно удалена"
 
 #: labels/views.py:55
-#| msgid "Unable to delete user"
 msgid "Unable to delete label"
 msgstr "Невозможно удалить метку"
 
@@ -179,24 +172,36 @@ msgstr "Вход"
 msgid "Sign up"
 msgstr "Регистрация"
 
+#: tasks/filters.py:15 tasks/models.py:16 tasks/templates/tasks/detail.html:20
+#: tasks/templates/tasks/index.html:34
+msgid "Status"
+msgstr "Статус"
+
+#: tasks/filters.py:16 tasks/filters.py:21 tasks/filters.py:26
+msgid "Not selected"
+msgstr "Не выбрано"
+
+#: tasks/filters.py:20 tasks/models.py:30 tasks/templates/tasks/detail.html:18
+#: tasks/templates/tasks/index.html:36
+msgid "Executor"
+msgstr "Исполнитель"
+
+#: tasks/filters.py:25
+msgid "Label"
+msgstr "Метка"
+
+#: tasks/filters.py:31
+msgid "Only own tasks"
+msgstr "Только свои задачи"
+
 #: tasks/models.py:11
 msgid "Description"
 msgstr "Описание"
 
-#: tasks/models.py:16 tasks/templates/tasks/detail.html:9
-#: tasks/templates/tasks/index.html:12
-msgid "Status"
-msgstr "Статус"
-
-#: tasks/models.py:22 tasks/templates/tasks/detail.html:11
-#: tasks/templates/tasks/index.html:13
+#: tasks/models.py:22 tasks/templates/tasks/detail.html:16
+#: tasks/templates/tasks/index.html:35
 msgid "Author"
 msgstr "Автор"
-
-#: tasks/models.py:30 tasks/templates/tasks/detail.html:13
-#: tasks/templates/tasks/index.html:14
-msgid "Executor"
-msgstr "Исполнитель"
 
 #: tasks/models.py:43
 msgid "task"
@@ -214,31 +219,31 @@ msgstr "Удаление задачи"
 msgid "Task view"
 msgstr "Просмотр задачи"
 
-#: tasks/templates/tasks/index.html:6 tasks/views.py:53
+#: tasks/templates/tasks/index.html:6 tasks/views.py:55
 msgid "Create task"
 msgstr "Создать задачу"
 
-#: tasks/templates/tasks/index.html:29
+#: tasks/templates/tasks/index.html:26
 msgid "Show"
 msgstr "Показать"
 
-#: tasks/views.py:28
+#: tasks/views.py:29
 msgid "Only the author can delete the task"
 msgstr "Задачу может удалить только ее автор"
 
-#: tasks/views.py:51
+#: tasks/views.py:53
 msgid "Task created successfully"
 msgstr "Задача успешно создана"
 
-#: tasks/views.py:67
+#: tasks/views.py:69
 msgid "Task updated successfully"
 msgstr "Задача успешно изменена"
 
-#: tasks/views.py:69
+#: tasks/views.py:71
 msgid "Edit task"
 msgstr "Изменение задачи"
 
-#: tasks/views.py:80
+#: tasks/views.py:82
 msgid "Task deleted successfully"
 msgstr "Задача успешно удалена"
 
@@ -253,10 +258,6 @@ msgstr "Имя пользователя"
 #: users/templates/users/index.html:11
 msgid "Full name"
 msgstr "Полное имя"
-
-#: users/templates/users/index.html:12
-msgid "Created at"
-msgstr "Создан"
 
 #: users/views.py:27
 msgid "User registered successfully"
@@ -288,7 +289,7 @@ msgstr "Невозможно удалить пользователя"
 
 #: users/views.py:67
 msgid "You are logged in"
-msgstr "Вы вошли"
+msgstr "Вы залогинены"
 
 #: users/views.py:68
 msgid "Log in"
@@ -298,14 +299,5 @@ msgstr "Войти"
 msgid "You are logged out"
 msgstr "Вы вышли"
 
-#: tasks/filters.py
-msgid "Label"
-msgstr "Метка"
-
-#: tasks/filters.py
-msgid "Only own tasks"
-msgstr "Только свои задачи"
-
-#: tasks/filters.py
-msgid "Not selected"
-msgstr "Не выбрано"
+#~ msgid "Created at"
+#~ msgstr "Создан"
