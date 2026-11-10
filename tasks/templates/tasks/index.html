@@ -4,6 +4,27 @@
 {% block content %}
   <h1 class="text-3xl font-bold text-gray-900 mb-6">{% translate "Tasks" %}</h1>
   <a href="{% url 'tasks_create' %}" class="inline-block mb-4 rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">{% translate "Create task" %}</a>
+    <form method="get" class="mb-6 rounded bg-white p-4 shadow">
+    <div class="grid gap-4 md:grid-cols-3">
+      <div>
+        <label for="{{ filter.form.status.id_for_label }}" class="block">{{ filter.form.status.label }}</label>
+        {{ filter.form.status }}
+      </div>
+      <div>
+        <label for="{{ filter.form.executor.id_for_label }}" class="block">{{ filter.form.executor.label }}</label>
+        {{ filter.form.executor }}
+      </div>
+      <div>
+        <label for="{{ filter.form.labels.id_for_label }}" class="block">{{ filter.form.labels.label }}</label>
+        {{ filter.form.labels }}
+      </div>
+    </div>
+    <div class="mt-4">
+      {{ filter.form.self_tasks }}
+      <label for="{{ filter.form.self_tasks.id_for_label }}">{{ filter.form.self_tasks.label }}</label>
+    </div>
+    <button type="submit" class="mt-4 rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">{% translate "Show" %}</button>
+  </form>
   <table class="w-full bg-white shadow rounded text-left">
     <thead>
       <tr class="border-b">

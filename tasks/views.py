@@ -10,10 +10,11 @@ from django.views.generic import (
     CreateView,
     DeleteView,
     DetailView,
-    ListView,
     UpdateView,
 )
+from django_filters.views import FilterView
 
+from .filters import TaskFilter
 from .forms import TaskForm
 from .models import Task
 
@@ -29,8 +30,9 @@ class AuthorRequiredMixin(UserPassesTestMixin):
         return redirect("tasks_index")
 
 
-class TaskListView(LoginRequiredMixin, ListView):
+class TaskListView(LoginRequiredMixin, FilterView):
     model = Task
+    filterset_class = TaskFilter
     template_name = "tasks/index.html"
     context_object_name = "tasks"
 
