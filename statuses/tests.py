@@ -94,8 +94,6 @@ class StatusCrudTest(TestCase):
         self.assertFalse(Status.objects.filter(pk=self.status.pk).exists())
 
     def test_delete_protected_status(self):
-        # Модели задач ещё нет, поэтому связь со статусом имитируем:
-        # delete() выбрасывает ProtectedError, как при on_delete=PROTECT.
         self.login()
         with mock.patch.object(
             Status, "delete", side_effect=ProtectedError("protected", [])

@@ -96,7 +96,7 @@ class LabelCrudTest(TestCase):
     def test_cannot_delete_label_linked_to_task(self):
         status = Status.objects.create(name="новый")
         task = Task.objects.create(name="Задача", status=status, author=self.user)
-        task.labels.add(self.label)  # связываем метку с задачей
+        task.labels.add(self.label)
         self.login()
         response = self.client.post(
             reverse("labels_delete", args=[self.label.pk]), follow=True

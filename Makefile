@@ -29,3 +29,6 @@ messages:
 
 compile-messages:
 	uv run python manage.py compilemessages
+
+test:
+	uv run python manage.py test
