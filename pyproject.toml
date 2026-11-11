@@ -15,9 +15,7 @@ dependencies = [
 ]
 
 [dependency-groups]
-dev = [
-    "ruff>=0.17.3",
-]
+dev = ["ruff>=0.17.3"]
 
 [tool.ruff]
-extend-exclude = ["migrations", "task_manager/settings.py"]
+extend-exclude = ["migrations"]
